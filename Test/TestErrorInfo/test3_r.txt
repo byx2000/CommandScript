@@ -1,0 +1,2 @@
+2
+Define: The token "STR" is redefined.

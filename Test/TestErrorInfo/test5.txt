@@ -1,0 +1,7 @@
+Block b1
+{
+	Println 123
+	Println 456
+}
+
+Call b2

@@ -1,0 +1,7 @@
+
+
+Define NUM 100
+
+
+
+Define SPACE abc

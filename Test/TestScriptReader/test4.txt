@@ -1,0 +1,11 @@
+//This is my first script
+
+//Bolock1
+Print "HelloWorld!" //output string "HelloWorld!"
+DrawCircle 0 0 100  //sraw a circle at (0, 0) with radius 100
+
+//Bolock2
+MessageBox "Hello!" YES NO //show a message box with text "Hello!" and a YES and a NO button
+Exit //exit the program
+
+//The script is end

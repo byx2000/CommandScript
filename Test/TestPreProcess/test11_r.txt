@@ -1,0 +1,17 @@
+Block b1
+{
+Print 123
+Print 456
+Print 789
+}
+Block b2
+{
+Call 3 5
+Print 789
+Print 456
+Call 3 5
+Print 123
+Call 3 5
+}
+Call 3 5
+Call 9 14

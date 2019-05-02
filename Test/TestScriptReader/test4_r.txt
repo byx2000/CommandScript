@@ -1,0 +1,4 @@
+Print "HelloWorld!"
+DrawCircle 0 0 100
+MessageBox "Hello!" YES NO
+Exit

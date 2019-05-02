@@ -1,0 +1,15 @@
+Define _STR hello!
+Define _STR_ world!
+Print _STR _STR_
+
+Define NUM1 2333
+Define NUM2 NUM1
+Define NUM3 NUM2
+Print NUM3
+
+Define A1 B1
+Define B1 C1
+Define C1 A1
+Print A1
+Print B1
+Print C1

@@ -1,0 +1,11 @@
+
+//comment 1
+Print 123 456 abc 789
+
+//bolck 1
+Print abc def 123
+Wait //statement 1
+
+
+
+Put 1312 gfd sdfe ewf //123456

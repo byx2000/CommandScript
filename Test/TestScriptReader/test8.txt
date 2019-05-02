@@ -1,0 +1,34 @@
+
+
+Block SayHello
+{
+	Println Helllo!
+	Println How SPACE are SPACE you?
+}
+
+
+Println 1
+Println 2
+
+
+
+Block SayHello
+{
+	Println Helllo!
+	Println How SPACE are SPACE you?
+}
+
+
+
+Println 3
+Call SayHello
+Println 5
+
+
+
+Block SayHello
+{
+	Println Helllo!
+	Println How SPACE are SPACE you?
+}
+

@@ -1,0 +1,18 @@
+Define YES 1
+Define NO  0
+Define TRUE  1
+Define FALSE 0
+
+Define UP 1
+Define DOWN 2
+Define LEFT 3
+Define RIGHT 4
+
+MsgBox "Hello!" YES NO
+Set flag1 FALSE
+Set flag2 TRUE
+
+Move npc1 UP 300
+Move npc1 LEFT -400
+Move npc2 RIGHT 10
+Move npc2 DOWN -100

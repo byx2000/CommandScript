@@ -1,0 +1,7 @@
+MsgBox "Hello!" 1 0
+Set flag1 0
+Set flag2 1
+Move npc1 1 300
+Move npc1 3 -400
+Move npc2 4 10
+Move npc2 2 -100

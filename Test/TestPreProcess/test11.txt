@@ -1,0 +1,22 @@
+
+Block b1
+{
+	Print 123
+	Print 456
+	Print 789
+}
+
+Block b2
+{
+	Call b1
+	Print 789
+	Print 456
+	Call b1
+	Print 123
+	Call b1
+}
+
+
+Call b1
+
+Call b2

@@ -1,0 +1,7 @@
+Define STR Hello!
+Print STR
+
+Define NUM 100
+Define FINISH 200
+
+Execute FINISH NUM

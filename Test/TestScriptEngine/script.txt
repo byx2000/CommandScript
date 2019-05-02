@@ -1,0 +1,39 @@
+//显示所有变量
+Block ShowAllVar
+{
+	Call ShowI
+}
+
+Block ShowI
+{
+	Show i
+	Call ShowJ	
+}
+
+Block ShowJ
+{
+	Show j
+}
+
+//定义变量
+Var i 100
+Var j 200
+
+Add i 10
+Add j 30
+Call ShowAllVar
+
+Add i j
+Call ShowAllVar
+
+Sub j i
+Call ShowAllVar
+
+Mul i j
+Call ShowAllVar
+
+Div i 2
+Call ShowAllVar
+
+Call ShowAllVar
+Call ShowAllVar

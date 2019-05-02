@@ -1,0 +1,6 @@
+Block b1
+{
+Println b1
+Call 3 4
+}
+Call 3 4

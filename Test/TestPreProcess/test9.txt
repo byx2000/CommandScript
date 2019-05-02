@@ -1,0 +1,42 @@
+//const definition
+Define BLOCK1 SayHello1
+Define BLOCK2 SayHello2
+Define BLOCK3 SayHello3
+
+//This is the first block
+Block BLOCK1
+{
+	Println Helllo!
+	Println How SPACE are SPACE you?
+}
+
+//test code 1
+Println 1
+Println 2
+Call BLOCK1 //function call
+
+
+//This is the second block
+Block BLOCK2
+{
+	Println Helllo!
+	Println I'm SPACE fine.
+}
+
+//test code 2
+Println 3
+Call BLOCK2
+Println 5
+
+//This is the third block
+Block BLOCK3
+{
+	Println Helllo!
+	Println Ooooooh!
+}
+
+//test code 3
+Println 100
+Call BLOCK1
+Call BLOCK2
+Call BLOCK3

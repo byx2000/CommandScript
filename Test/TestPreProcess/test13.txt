@@ -1,0 +1,12 @@
+Block b1
+{
+	Call b2
+}
+
+Block b2
+{
+	Call b1
+}
+
+Call b1
+Call b2

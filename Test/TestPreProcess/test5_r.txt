@@ -1,0 +1,16 @@
+Block SayHello
+{
+Println Helllo!
+Println How SPACE are SPACE you?
+}
+Println 1
+Println 2
+Println 3
+Call 3 4
+Println 5
+Call 14 15
+Block SayGoodbye
+{
+Println Bye!
+Println See SPACE you SPACE next SPACE time!
+}

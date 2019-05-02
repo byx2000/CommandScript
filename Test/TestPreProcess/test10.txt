@@ -1,0 +1,47 @@
+Define UP    0
+Define DOWN  1
+Define LEFT  2
+Define RIGHT 3
+
+Block EmptyBlock1
+{
+}
+
+Block EmptyBlock2
+{
+
+
+}
+
+Block Run
+{
+	Move RIGHT 1000
+}
+
+Block TurnRight
+{
+	Move UP 10
+	Move RIGHT 10
+}
+
+Block TurnLeft
+{
+	Move DOWN -10
+	Move LEFT -10
+}
+
+Block Circle
+{
+	Move UP 20
+	Move RIGHT 20
+	Move DOWN 20
+	Move LEFT 20
+}
+
+//main process
+Call Run
+Call EmptyBlock1
+Call EmptyBlock2
+Call Circle
+Call TurnRight
+Call TurnLeft

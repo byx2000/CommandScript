@@ -1,0 +1,7 @@
+Block b1
+{
+	Println b1
+	Call b1
+}
+
+Call b1
