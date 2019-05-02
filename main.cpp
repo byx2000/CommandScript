@@ -17,7 +17,7 @@ public:
     {
         if (para.size() != 1)
         {
-            error.setErrorText("This command requires ONE parameter.");
+            error.setErrorText(ERROR_PARA_COUNT_MISMATCH("PrintString", 1));
             return false;
         }
 

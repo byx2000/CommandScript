@@ -9,6 +9,7 @@
 #include <map>
 #include <unordered_map>
 #include "ScriptReader.h"
+#include "ErrorText.h"
 
 using namespace std;
 
@@ -40,6 +41,9 @@ class Command
 public:
 	virtual string getName() const { return ""; } //返回自定义命令的名称（子类覆盖）
 	virtual bool execute(const vector<string> &para, RuntimeError& error) { return false; }; //执行自定义命令（子类覆盖）
+	static bool IsStringInt(const string &s); //判断字符串是否是整数
+	static bool IsStringFloat(const string &s); //判断字符串是否是小数
+	static bool IsStringIdentifier(const string &s); //判断字符串是否是合法的标识符
 	bool operator<(const Command &c) const { return c.getName() < getName(); }
 	bool operator>(const Command &c) const { return c.getName() > getName(); }
 	bool operator==(const Command &c) const { return c.getName() == getName(); }

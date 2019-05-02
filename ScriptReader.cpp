@@ -47,7 +47,7 @@ string ScriptReader::toString() const
 
 void ScriptReader::print() const
 {
-	cout << toString() << endl << endl;
+	cout << toString() << endl;
 }
 
 void ScriptReader::trim(string & s)
@@ -82,11 +82,10 @@ string Statement::toString() const
 	{
 		res += (para[i] + " ");
 	}
-	res += "\n\n";
 	return res;
 }
 
 void Statement::print() const
 {
-	cout << toString() << endl << endl;
+	cout << toString() << endl;
 }

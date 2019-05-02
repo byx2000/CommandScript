@@ -34,6 +34,7 @@
 		</Compiler>
 		<Unit filename="CommandScript.cpp" />
 		<Unit filename="CommandScript.h" />
+		<Unit filename="ErrorText.h" />
 		<Unit filename="ScriptReader.cpp" />
 		<Unit filename="ScriptReader.h" />
 		<Unit filename="Test.h" />

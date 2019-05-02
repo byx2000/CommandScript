@@ -49,6 +49,7 @@ bool CommandScriptEngine::preProcess(ScriptReader &script, RuntimeError& error)
 /*执行脚本*/
 bool CommandScriptEngine::runScript(ScriptReader script, RuntimeError& error)
 {
+	error.set(ERROR_NO_ERROR, 0);
 
 	//预处理
 	if (!preProcess(script, error))
@@ -79,7 +80,7 @@ bool CommandScriptEngine::runScript(const ScriptReader & script, RuntimeError & 
 			//参数格式不正确
 			if (para.size() != 2)
 			{
-				error.set(name + ": This command requires TWO parameters.", script.getOriginalLineNum(i));
+				error.set(ERROR_PARA_COUNT_MISMATCH(name, 2), script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -99,7 +100,7 @@ bool CommandScriptEngine::runScript(const ScriptReader & script, RuntimeError & 
 				|| e < 1 || e > cLine
 				|| b > e)
 			{
-				error.set(name + ": The begin line and end line of sub procedure is illegal.", script.getOriginalLineNum(i));
+				error.set(ERROR_SUB_PROCESS_INVALID, script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -128,7 +129,7 @@ bool CommandScriptEngine::runScript(const ScriptReader & script, RuntimeError & 
 			//无法识别的命令
 			if (commands.count(name) == 0)
 			{
-				error.set(name + ": This command is not exist.", script.getOriginalLineNum(i));
+				error.set(ERROR_COMMAND_NOT_FOUND(name), script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -159,7 +160,7 @@ bool CommandScriptEngine::processDefine(ScriptReader & script, RuntimeError & er
 			//参数个数不符合要求
 			if (para.size() != 2)
 			{
-				error.set("Define: This command requires TWO parameters.", script.getOriginalLineNum(i));
+				error.set(ERROR_PARA_COUNT_MISMATCH("Define", 2), script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -168,14 +169,14 @@ bool CommandScriptEngine::processDefine(ScriptReader & script, RuntimeError & er
 			//常量标识不是合法的标识符
 			if (token == "" || token[0] == ' ' || (token[0] >= '0' && token[0] <= '9'))
 			{
-				error.set("Define: Token name \"" + token + "\" is illegal.", script.getOriginalLineNum(i));
+				error.set(ERROR_TOKEN_INVALID(token), script.getOriginalLineNum(i));
 				return false;
 			}
 
 			//重定义
 			if (constToken.count(token) != 0)
 			{
-				error.set("Define: The token \"" + token + "\" is redefined.", script.getOriginalLineNum(i));
+				error.set(ERROR_TOKEN_REDEFINE(token), script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -233,7 +234,7 @@ bool CommandScriptEngine::processBlock(ScriptReader & script, RuntimeError & err
 			//缺少语句块标识
 			if (para.size() != 1)
 			{
-				error.set("Block: The following block token is missing.", script.getOriginalLineNum(i));
+				error.set(ERROR_PARA_COUNT_MISMATCH("Block", 1), script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -243,21 +244,21 @@ bool CommandScriptEngine::processBlock(ScriptReader & script, RuntimeError & err
 			//标识不合法
 			if (token[0] >= '0' && token[0] <= '9')
 			{
-				error.set("Block: The block token \"" + token + "\"is illegal.", script.getOriginalLineNum(i));
+				error.set(ERROR_TOKEN_INVALID(token), script.getOriginalLineNum(i));
 				return false;
 			}
 
 			//语句块重定义
 			if (blockToken.count(token) != 0)
 			{
-				error.set("Block: The block token \"" + token + "\" is redefined.", script.getOriginalLineNum(i));
+				error.set(ERROR_TOKEN_REDEFINE(token), script.getOriginalLineNum(i));
 				return false;
 			}
 
 			//缺少左花括号
 			if (i == cLine || script.getCommandName(i + 1) != "{")
 			{
-				error.set("Block: Missing \"{\".", script.getOriginalLineNum(i));
+				error.set(ERROR_MISSING_LEFT_CURLY_BRACKET, script.getOriginalLineNum(i));
 				return false;
 			}
 
@@ -277,7 +278,7 @@ bool CommandScriptEngine::processBlock(ScriptReader & script, RuntimeError & err
 			//缺少右花括号
 			if (j > cLine)
 			{
-				error.set("Block: Missing \"}\".", script.getOriginalLineNum(cLine));
+				error.set(ERROR_MISSING_RIGHT_CURLY_BRACKET, script.getOriginalLineNum(cLine));
 				return false;
 			}
 
@@ -301,7 +302,7 @@ bool CommandScriptEngine::processBlock(ScriptReader & script, RuntimeError & err
 			//参数格式错误
 			if (para.size() != 1)
 			{
-				error.set("Call: This command needs TWO parameters.", script.getOriginalLineNum(cLine));
+				error.set(ERROR_PARA_COUNT_MISMATCH("Call", 1), script.getOriginalLineNum(cLine));
 				return false;
 			}
 
@@ -310,7 +311,7 @@ bool CommandScriptEngine::processBlock(ScriptReader & script, RuntimeError & err
 			//语句块未定义
 			if (blockToken.count(token) == 0)
 			{
-				error.set("Call: The code block \"" + token + "\" is undefined.", script.getOriginalLineNum(cLine));
+				error.set(ERROR_TOKEN_UNDEFINE(token), script.getOriginalLineNum(cLine));
 				return false;
 			}
 
@@ -332,5 +333,67 @@ bool CommandScriptEngine::processBlock(ScriptReader & script, RuntimeError & err
 		}
 	}
 
+	return true;
+}
+
+bool Command::IsStringInt(const string & s)
+{
+	if (s.size() == 0)
+	{
+		return false;
+	}
+	if (!isdigit(s[0]) && !(s[0] == '-'))
+	{
+		return false;
+	}
+
+	for (size_t i = 1; i < s.size(); ++i)
+	{
+		if (!isdigit(s[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Command::IsStringFloat(const string & s)
+{
+	if (s.size() == 0)
+	{
+		return false;
+	}
+	bool flag = false;
+	for (size_t i = 0; i < s.size(); ++i)
+	{
+		if (s[i] == '.')
+		{
+			if (flag)
+			{
+				return false;
+			}
+			else
+			{
+				flag = true;
+			}
+		}
+		else if (!isdigit(s[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool Command::IsStringIdentifier(const string & s)
+{
+	if (s.size() == 0)
+	{
+		return false;
+	}
+	if (isdigit(s[0]))
+	{
+		return false;
+	}
 	return true;
 }

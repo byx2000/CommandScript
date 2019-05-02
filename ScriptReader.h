@@ -24,6 +24,7 @@ public:
 	vector<string> getParas() const { return para; }
 	string getPara(size_t i) const { return para[i - 1]; }
 	void setName(const string &name) { this->name = name; }
+	void setPara(size_t i, const string& p) { para[i - 1] = p; }
 	void setParas(const vector<string> &para) { this->para = para; }
 	void setLine(size_t line) { this->line = line; }
 	size_t getLine() const { return line; }
@@ -54,6 +55,7 @@ public:
 	vector<string> getCommandParas(size_t line) const { return script[line - 1].getParas(); }
 	string getCommandPara(size_t line, size_t i) const { return script[line - 1].getPara(i); }
 	void setCommandName(size_t line, const string &name) { script[line - 1].setName(name); }
+	void setCommandPara(size_t line, size_t i, const string &p) { script[line - 1].setPara(i, p); }
 	void setCommandParas(size_t line, const vector<string> &para) { script[line - 1].setParas(para); }
 	void removeStatement(size_t line) { script.erase(script.begin() + (line - 1)); };
 	size_t getOriginalLineNum(size_t line) const { return script[line - 1].getLine(); }

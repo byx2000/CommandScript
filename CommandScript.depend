@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1556763245 source:d:\programs\cb\commandscript\main.cpp
+1556785414 source:d:\programs\cb\commandscript\main.cpp
 	<iostream>
 	"CommandScript.h"
 	"Test.h"
 
-1556764270 source:d:\programs\cb\commandscript\commandscript.cpp
+1556785214 source:d:\programs\cb\commandscript\commandscript.cpp
 	"CommandScript.h"
 
-1556764263 d:\programs\cb\commandscript\commandscript.h
+1556785206 d:\programs\cb\commandscript\commandscript.h
 	<iostream>
 	<string>
 	<fstream>
@@ -17,8 +17,9 @@
 	<map>
 	<unordered_map>
 	"ScriptReader.h"
+	"ErrorText.h"
 
-1556764254 d:\programs\cb\commandscript\scriptreader.h
+1556785187 d:\programs\cb\commandscript\scriptreader.h
 	<iostream>
 	<string>
 	<sstream>
@@ -26,7 +27,7 @@
 	<fstream>
 	<cassert>
 
-1556761416 source:d:\programs\cb\commandscript\scriptreader.cpp
+1556785196 source:d:\programs\cb\commandscript\scriptreader.cpp
 	"ScriptReader.h"
 
 1556762909 d:\programs\cb\commandscript\test.h
@@ -37,4 +38,6 @@
 	<cassert>
 	"ScriptReader.h"
 	"CommandScript.h"
+
+1556785176 d:\programs\cb\commandscript\errortext.h
 

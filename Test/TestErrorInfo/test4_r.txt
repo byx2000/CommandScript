@@ -1,2 +1,2 @@
 8
-Define: The token "STR" is redefined.
+The token "STR" is redefined.
