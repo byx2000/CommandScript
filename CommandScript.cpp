@@ -30,11 +30,6 @@ bool CommandScriptEngine::removeCommand(const Command & command)
 	return true;
 }
 
-ScriptReader CommandScriptEngine::scriptFromFile(const string & file)
-{
-	return ScriptReader(file);
-}
-
 /*‘§¥¶¿Ì*/
 bool CommandScriptEngine::preProcess(ScriptReader &script, RuntimeError& error)
 {

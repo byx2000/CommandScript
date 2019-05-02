@@ -33,9 +33,9 @@ public:
 	bool operator!=(const Statement &s) const { return name != s.name || para != s.para; }
 
 private:
-	string name;
-	vector<string> para;
-	size_t line;
+	string name; //命令名称
+	vector<string> para; //命令参数
+	size_t line; //语句所在的行号
 };
 
 /*
@@ -47,8 +47,8 @@ class ScriptReader
 public:
 	ScriptReader() {}
 	ScriptReader(const string &file) { readScript(file); }
-	void readScript(const string &file);
-	size_t getLength() const { return script.size(); }
+	void readScript(const string &file); //从文件读取脚本
+	size_t getLength() const { return script.size(); } //获取脚本行数
 	string getCommandName(size_t line) const { return script[line - 1].getName(); }
 	size_t getCommandParaNum(size_t line) const { return script[line - 1].getParaNum(); }
 	vector<string> getCommandParas(size_t line) const { return script[line - 1].getParas(); }

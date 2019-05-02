@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <stack>
 #include <sstream>
 #include <map>
 #include <unordered_map>
@@ -18,11 +19,11 @@ class RuntimeError
 {
 public:
 	RuntimeError() : errorText("no error"), line(0) {}
-	void setErrorText(const string &text) { errorText = text; }
-	void setLine(size_t line) { this->line = line; }
-	void set(const string &text, size_t line) { errorText = text; this->line = line; }
-	string getErrorText() { return errorText; }
-	size_t getLine() { return line; }
+	void setErrorText(const string &text) { errorText = text; } //设置错误描述
+	void setLine(size_t line) { this->line = line; } //设置错误行号
+	void set(const string &text, size_t line) { errorText = text; this->line = line; } //同时设置错误描述和行号
+	string getErrorText() { return errorText; } //获取错误描述
+	size_t getLine() { return line; } //获取错误行号
 private:
 	string errorText;
 	size_t line;
@@ -37,8 +38,8 @@ private:
 class Command
 {
 public:
-	virtual string getName() const { return ""; }
-	virtual bool execute(const vector<string> &para, RuntimeError& error) { return false; };
+	virtual string getName() const { return ""; } //返回自定义命令的名称（子类覆盖）
+	virtual bool execute(const vector<string> &para, RuntimeError& error) { return false; }; //执行自定义命令（子类覆盖）
 	bool operator<(const Command &c) const { return c.getName() < getName(); }
 	bool operator>(const Command &c) const { return c.getName() > getName(); }
 	bool operator==(const Command &c) const { return c.getName() == getName(); }
@@ -50,16 +51,15 @@ public:
 class CommandScriptEngine
 {
 public:
-	bool addCommand(Command &command);
-	bool removeCommand(const Command &command);
-	static ScriptReader scriptFromFile(const string &file);
-	static bool preProcess(ScriptReader &script, RuntimeError& error);
-	bool runScript(ScriptReader script, RuntimeError& error);
-	bool runScript(const string &file, RuntimeError& error);
+	bool addCommand(Command &command); //添加自定义命令
+	bool removeCommand(const Command &command); //删除自定义命令
+	static bool preProcess(ScriptReader &script, RuntimeError& error); //预处理脚本
+	bool runScript(ScriptReader script, RuntimeError& error); //运行脚本（从ScriptReader）
+	bool runScript(const string &file, RuntimeError& error); //运行脚本（从文件）
 
 private:
 	unordered_map<string, Command*> commands;
 	bool runScript(const ScriptReader& script, RuntimeError& error, size_t beginLine, size_t endLine);
-	static bool processDefine(ScriptReader& script, RuntimeError& error);
-	static bool processBlock(ScriptReader& script, RuntimeError& error);
+	static bool processDefine(ScriptReader& script, RuntimeError& error); //常量定义预处理
+	static bool processBlock(ScriptReader& script, RuntimeError& error); //语句块预处理
 };
